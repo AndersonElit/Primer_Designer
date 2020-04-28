@@ -1,0 +1,20 @@
+1588035324119	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilerxgf22"
+1588035327674	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1588035334473	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1588035334474	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1588035334475	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1588035334476	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1588035356998	Marionette	INFO	Listening on port 34133
+1588035357863	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.pubmed.gov/portal/portal3rc.fcgi/4188853/js/4159018/4159791/3812534/4087685/3812535/3781604/4080513/4179429/4186313/4149125/3879255/4121861/4179604/4175954/4076482/2486879/3390268/3758627/1778515/3812291/3908752/3423/3939399/4168176/3407051/25348/4019784/3924613/3798707/3397055/4001808.js, line 3271: unreachable code after return statement
+1588035375631	Marionette	INFO	Stopped listening on port 34133
+1588037140728	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilePxGdx1"
+1588037144868	addons.webextension.doh-rollout@mozilla.org	WARN	Loading extension 'doh-rollout@mozilla.org': Reading manifest: Invalid extension permission: networkStatus
+1588037149848	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1588037149848	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1588037149849	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1588037149850	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1588037168022	Marionette	INFO	Listening on port 45365
+1588037168114	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.pubmed.gov/portal/portal3rc.fcgi/4188853/js/4159018/4159791/3812534/4087685/3812535/3781604/4080513/4179429/4186313/4149125/3879255/4121861/4179604/4175954/4076482/2486879/3390268/3758627/1778515/3812291/3908752/3423/3939399/4168176/3407051/25348/4019784/3924613/3798707/3397055/4001808.js, line 3271: unreachable code after return statement
+1588037180984	Marionette	INFO	Stopped listening on port 45365

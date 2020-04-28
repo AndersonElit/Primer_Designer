@@ -65,7 +65,7 @@ class SEARCH:
 
     def links_genbank_fasta_protein(links):
 
-        def scraper1(webpage):
+        def scraper(webpage):
             
             content = urllib.request.urlopen(webpage)
             soup = BeautifulSoup(content, 'html5lib')
@@ -79,7 +79,7 @@ class SEARCH:
         for link in links:
 
             inc_link = 'https://www.ncbi.nlm.nih.gov'
-            page_content = scraper1(link)
+            page_content = scraper(link)
             print(str(cont)+' de '+str(length))
             cont += 1
             
@@ -110,6 +110,44 @@ class SEARCH:
             data_set.append(data)
 
         return data_set
+
+class PRIMER_DESIGN:
+
+    def get_fasta(page_content):
+
+        def scraper(webpage):
+
+            # this require download geckodrive and move it to usr/local/bin
+            driver = webdriver.Firefox()
+            driver.get(website)
+            content = driver.page_source
+            soup = BeautifulSoup(content, 'html5lib')
+            driver.close()
+
+            return soup
+
+        link_fasta = 'https://www.ncbi.nlm.nih.gov'
+
+        # get gene name
+        title = page_content.find_all('h1', class_ = 'title')
+        ID = title[0].span.text
+        name = title[0].em.text
+        gene_name = ID+' - '+name
+
+        # get fasta link
+        content_link = page_content.find_all('ol')
+        olgene = content_link[0]
+        gene_info = olgene.find_all('a')
+        href_fasta = gene_info[1]['href']
+        link_fasta += href_fasta
+        link_fasta_content = scraper(link_fasta)
+        seq = link_fasta_content.find_all('pre')
+        seq_fasta = seq[0].text
+
+        return seq_fasta
+        
+
+        
             
             
 

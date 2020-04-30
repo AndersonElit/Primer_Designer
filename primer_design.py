@@ -14,8 +14,8 @@ if length == 0:
 
 else:
 
-    site_content = SEARCH.scraper2(webpage)
     fasta_seq = PRIMER_DESIGN.get_fasta(page_content)
-
+    primers = PRIMER_DESIGN.PRIMER3()
+    
     
 

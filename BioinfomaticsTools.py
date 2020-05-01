@@ -162,12 +162,12 @@ class PRIMER_DESIGN:
         return seq_fastac
         '''
 
-    def PRIMER3():
+    def PRIMER3(sequence):
 
         primers = primer3.bindings.designPrimers(
             {
                 'SEQUENCE_ID': 'NC_045512.2',
-                'SEQUENCE_TEMPLATE': 'ATGATTGAACTTTCATTAATTGACTTCTATTTGTGCTTTTTAGCCTTTCTGCTATTCCTTGTTTTAATTATGCTTATTATCTTTTGGTTCTCACTTGAACTGCAAGATCATAATGAAACTTGTCACGCCTAA'
+                'SEQUENCE_TEMPLATE': sequence
             },
             {
                 'PRIMER_OPT_SIZE': 20,

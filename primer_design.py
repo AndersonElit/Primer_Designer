@@ -15,7 +15,7 @@ if length == 0:
 else:
 
     fasta_seq = PRIMER_DESIGN.get_fasta(page_content)
-    primers = PRIMER_DESIGN.PRIMER3()
+    primers = PRIMER_DESIGN.PRIMER3(fasta_seq)
     
     
 

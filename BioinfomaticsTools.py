@@ -194,6 +194,99 @@ class PRIMER_DESIGN:
 
         return primers
 
+    def primers_tm_gc(dictionary):
+
+        primers_num = dictionary.get('PRIMER_LEFT_NUM_RETURNED') - 1
+        cont = 0
+        data_set = []
+
+        while cont <= primers_num:
+
+            # promer sequences
+            left = 'PRIMER_LEFT_' + str(cont) + '_SEQUENCE'
+            right = 'PRIMER_RIGHT_' + str(cont) + '_SEQUENCE'
+            left_primer = dictionary.get(left)
+            right_primer = dictionary.get(right)
+            primer_pair = [left_primer, right_primer]
+            
+            # Tm
+            Tml = 'PRIMER_LEFT_' + str(cont) + '_TM'
+            Tmr = 'PRIMER_RIGHT_' + str(cont) + '_TM' 
+            left_primer_tm = round(dictionary.get(Tml), 2)
+            right_primer_tm = round(dictionary.get(Tmr), 2)
+            Tm_pair = [left_primer_tm, right_primer_tm]
+
+            # GC percent
+            GCl = 'PRIMER_LEFT_' + str(cont) + '_GC_PERCENT'
+            GCr = 'PRIMER_RIGHT_' + str(cont) + '_GC_PERCENT'
+            left_primer_GC = dictionary.get(GCl)
+            right_primer_GC = dictionary.get(GCr)
+            GC_pair = [left_primer_GC, right_primer_GC]
+
+            # data compile
+            data = [primer_pair, Tm_pair, GC_pair] 
+            data_set.append(data)
+            cont += 1
+
+        return data_set
+
+    def Hairpins(Primers_Tm_GC):
+
+        data_set = []
+
+        for data in Primers_Tm_GC:
+
+            primers = data[0]
+            primer_left = primers[0]
+            primer_right = primers[1]
+            Hairpin_left = primer3.calcHairpin(primer_left)
+            Hairpin_right = primer3.calcHairpin(primer_right)
+            thermo_left = [round(Hairpin_left.tm, 2), round(Hairpin_left.dg, 2), round(Hairpin_left.dh, 2), round(Hairpin_left.ds, 2)]
+            thermo_right = [round(Hairpin_right.tm, 2), round(Hairpin_right.dg, 2), round(Hairpin_right.dh, 2), round(Hairpin_right.ds, 2)]
+            hairpin_data = [thermo_left, thermo_right]
+            data.append(hairpin_data)
+            data_set.append(data)
+
+        return data_set
+
+    def Homodimers(Hairpins_calc):
+
+        data_set = []
+
+        for data in Hairpins_calc:
+
+            primers = data[0]
+            primer_left = primers[0]
+            primer_right = primers[1]
+            Homodimer_left = primer3.calcHomodimer(primer_left)
+            Homodimer_right = primer3.calcHomodimer(primer_right)
+            thermo_left = [round(Homodimer_left.tm, 2), round(Homodimer_left.dg, 2), round(Homodimer_left.dh, 2), round(Homodimer_left.ds, 2)]
+            thermo_right = [round(Homodimer_right.tm, 2), round(Homodimer_right.dg, 2), round(Homodimer_right.dh, 2), round(Homodimer_right.ds, 2)]
+            Homodimer_data = [thermo_left, thermo_right]
+            data.append(Homodimer_data)
+            data_set.append(data)
+
+        return data_set
+
+    def Heterodimers(Homodimers_calc):
+
+        data_set = []
+
+        for data in Homodimers_calc:
+
+            primers = data[0]
+            primer_left = primers[0]
+            primer_right = primers[1]
+            Heterodimer = primer3.calcHeterodimer(primer_left, primer_right)
+            thermo = [round(Heterodimer.tm, 2), round(Heterodimer.dg, 2), round(Heterodimer.dh, 2), round(Heterodimer.ds, 2)]
+            data.append(thermo)
+            data_set.append(data)
+
+        return data_set
+
+        
+            
+
 
         
         

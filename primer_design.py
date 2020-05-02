@@ -15,7 +15,13 @@ if length == 0:
 else:
 
     fasta_seq = PRIMER_DESIGN.get_fasta(page_content)
-    primers = PRIMER_DESIGN.PRIMER3(fasta_seq)
+    dictionary = PRIMER_DESIGN.PRIMER3(fasta_seq)
+    Primers_Tm_GC = PRIMER_DESIGN.primers_tm_gc(dictionary)
+    Hairpins_calc = PRIMER_DESIGN.Hairpins(Primers_Tm_GC)
+    Homodimers_calc = PRIMER_DESIGN.Homodimers(Hairpins_calc)
+    Heterodimers_calc = PRIMER_DESIGN.Heterodimers(Homodimers_calc)
+    
+    
     
     
 

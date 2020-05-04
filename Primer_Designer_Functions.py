@@ -144,6 +144,13 @@ class PRIMER_DESIGN:
         flank2 = int(region_list[1])
 
         gene = seqt[flank1:flank2]
+        fasta_region = title_seq[0] + '\n' + gene
+
+        # create .fasta file with sequences
+
+        f= open("seq.fasta","w+")
+        f.write(fasta_region)
+        f.close()
 
         return gene
 
@@ -284,6 +291,67 @@ class PRIMER_DESIGN:
 
         return data_set
 
+class IN_SILICO_PCR:
+
+    # get primers
+
+    def primers(Heterodimers_calc):
+
+        primers_set = []
+
+        for data in Heterodimers_calc:
+
+            primers = data[0]
+            primer_left = primers[0]
+            primer_right = primers[1]
+            primer_pair = [primer_left, primer_right]
+            primers_set.append(primer_pair)
+
+        return primers_set
+
+    def in_silico_pcr(primer_list):
+
+        count1 = 0
+        product_list = []
+
+        for primer_pair in primer_list:
+
+            forward = primer_pair[0]
+            reverse = primer_pair[1]
+            ipcress_name = 'primers' + str(count) + '.ipcress'
+            ipcress_content = 'experiment' + str(count) + ' ' + forward + ' ' + reverse + ' ' + '75 225'
+            file= open(ipcress_name,"w+")
+            file.write(ipcress_content)
+            file.close()
+            experiment = 'ipcress -i ' + ipcress_name + ' -s seq.fasta -P'
+            insilicopcr = str(bash(experiment))
+            pcr_list = insilicopcr.split('\n')
+
+            # extract product length(bp)
+            product_length = pcr_list[6]
+            product_lengthc = product_length.replace('    ', '')
+            product_lengthc_list = product_lengthc.split(' ')
+            product_length_bp = product_lengthc_list[1] + ' ' + product_lengthc_list[2]
+
+            #extract fasta product
+            length = len(pcr_list) - 1
+            fasta_list = pcr_list[16:length]
+            fasta_sequence = fasta_list[0] + '\n'
+
+            count2 = 1
+            len_fasta = len(fasta_list) - 1
+
+            while cont <= len_fasta:
+
+                fragment = fasta_list[cont]
+                fasta_sequence += fragment
+                count2 += 1
+
+            product_list.append(fasta_sequence)
+            count1 += 1
+
+        return experiment
+            
         
             
 

@@ -2,7 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 import primer3
 from bash import bash
-from Bio.Seq import Seq
+from Bio.Seq import Seq, Entrez, SeqIO
 
 class SEARCH:
     
@@ -126,12 +126,13 @@ class PRIMER_DESIGN:
         regionc2 = regionc1.replace(')', '')
         region_list = regionc2.split('..')
 
-        # extract sequence form nucleotide database
+        '''
+        # extract sequence form nucleotide database, this is since linux terminal
         command = 'esearch -db nucleotide -query "' + ID + '" | efetch -format fasta'
         seq = str(bash(command))
         title_seq = seq.split('\n')
         length = len(title_seq) - 1
-
+        
         cont = 1
         seqt = ''
 
@@ -140,12 +141,26 @@ class PRIMER_DESIGN:
             fragment = title_seq[cont]
             seqt += fragment
             cont += 1
+        '''
 
+        #extract sequence with biopython
+        seq = Entrez.efetch(db="nucleotide", id=ID, rettype="fasta", retmode="text")
+        record = SeqIO.read(seq, "fasta")
+        seq.close()
+        sequence = str(record.seq)
+        
         flank1 = int(region_list[0]) - 1
         flank2 = int(region_list[1])
 
-        gene = seqt[flank1:flank2]
-        fasta_region = title_seq[0] + '\n' + gene
+        gene = sequence[flank1:flank2]
+
+        # build fasta file
+        all_record = str(record)
+        title_seq = all_record.split('\n')
+        description = title_Seq[2]
+        split = description.split(': ')
+        seq_t = split[1]
+        fasta_region = '>' + seq_t + '\n' + gene
 
         # create .fasta file with sequences
 

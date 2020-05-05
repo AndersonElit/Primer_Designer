@@ -2,6 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 import primer3
 from bash import bash
+from Bio.Seq import Seq
 
 class SEARCH:
     
@@ -318,8 +319,8 @@ class IN_SILICO_PCR:
 
             forward = primer_pair[0]
             reverse = primer_pair[1]
-            ipcress_name = 'primers' + str(count) + '.ipcress'
-            ipcress_content = 'experiment' + str(count) + ' ' + forward + ' ' + reverse + ' ' + '75 225'
+            ipcress_name = 'primers' + str(count1) + '.ipcress'
+            ipcress_content = 'experiment' + str(count1) + ' ' + forward + ' ' + reverse + ' ' + '75 225'
             file= open(ipcress_name,"w+")
             file.write(ipcress_content)
             file.close()
@@ -337,20 +338,28 @@ class IN_SILICO_PCR:
             length = len(pcr_list) - 1
             fasta_list = pcr_list[16:length]
             fasta_sequence = fasta_list[0] + '\n'
+            sequence = ''
 
             count2 = 1
             len_fasta = len(fasta_list) - 1
 
-            while cont <= len_fasta:
+            while count2 <= len_fasta:
 
-                fragment = fasta_list[cont]
+                fragment = fasta_list[count2]
                 fasta_sequence += fragment
+                sequence += fragment
                 count2 += 1
 
-            product_list.append(fasta_sequence)
+            # calculate complement con biopython
+
+            sequence_no_title = Seq(sequence)
+            complement = sequence_no_title.complement()
+            fasta_complement = '>complement' + str(count1) + '\n' + complement
+            product_with_complement = [product_length_bp, fasta_sequence, fasta_complement]
+            product_list.append(product_with_complement)
             count1 += 1
 
-        return experiment
+        return product_list
             
         
             

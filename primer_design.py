@@ -8,7 +8,7 @@ page_content = SEARCH.scraper1(webpage)
 links = SEARCH.links_results(page_content)
 length = len(links)
 
-if length == 0:
+if length > 1:
 
     print("multiple results, specify more its search")
 
@@ -24,6 +24,7 @@ else:
 
     # In_silico PCR
     primer_list = IN_SILICO_PCR.primers(Heterodimers_calc)
+    products = IN_SILICO_PCR.in_silico_pcr(primer_list)
     
     
     

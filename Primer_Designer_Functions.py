@@ -2,7 +2,8 @@ import urllib.request
 from bs4 import BeautifulSoup
 import primer3
 from bash import bash
-from Bio.Seq import Seq, Entrez, SeqIO
+from Bio.Seq import Seq
+from Bio import Entrez, SeqIO
 
 class SEARCH:
     
@@ -157,7 +158,7 @@ class PRIMER_DESIGN:
         # build fasta file
         all_record = str(record)
         title_seq = all_record.split('\n')
-        description = title_Seq[2]
+        description = title_seq[2]
         split = description.split(': ')
         seq_t = split[1]
         fasta_region = '>' + seq_t + '\n' + gene
@@ -325,6 +326,7 @@ class IN_SILICO_PCR:
 
         return primers_set
 
+    '''
     def in_silico_pcr(primer_list):
 
         count1 = 0
@@ -375,24 +377,32 @@ class IN_SILICO_PCR:
             count1 += 1
 
         return product_list
-            
-        
-            
+        '''
 
+    def in_silico_pcr(primer_list, fasta_seq):
 
-        
-        
+        product_list = []
 
-        
-            
-            
+        for pair in primer_list:
 
-            
+            left = pair[0]
+            right = pair[1]
+            start = fasta_seq.find(left)
+            reverse_right = ''.join(reversed(right))
+            seq_right = Seq(reverse_right)
+            complement_right = str(seq_right.complement())
+            end = fasta_seq.find(complement_right) + len(right)
+            distance = end - start
+            product_leght = str(distance) + ' bp'
+            product = fasta_seq[start:end]
+            seq_product = Seq(product)
+            complement_product = str(seq_product.complement())
+            product_pair = [product_leght, product, complement_product]
+            product_list.append(product_pair)
 
-        
-        
+        return product_list
 
-        
+          
     
 
     

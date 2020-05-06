@@ -24,7 +24,7 @@ else:
 
     # In_silico PCR
     primer_list = IN_SILICO_PCR.primers(Heterodimers_calc)
-    products = IN_SILICO_PCR.in_silico_pcr(primer_list)
+    pcr_products = IN_SILICO_PCR.in_silico_pcr(primer_list, fasta_seq)
     
     
     

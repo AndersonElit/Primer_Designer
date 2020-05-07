@@ -5,7 +5,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('keyword.html')
+
+@app.route('/keyword')
+def keyword():
+    return render_template('keyword.html')
+
+@app.route('/geneid')
+def geneid():
+    return render_template('geneid.html')
+
+@app.route('/fastaseq')
+def fastaseq():
+    return render_template('fastaseq.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():

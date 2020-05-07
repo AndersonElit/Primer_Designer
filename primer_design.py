@@ -1,16 +1,16 @@
 from Primer_Designer_Functions import SEARCH, PRIMER_DESIGN, IN_SILICO_PCR
 
-keyword = "ORF7b coronavirus homo sapiens"
+keyword = "ORF7b coronavirus"
 
 # searching
 webpage = SEARCH.searcher(keyword)
 page_content = SEARCH.scraper1(webpage)
-links = SEARCH.links_results(page_content)
-length = len(links)
+results = SEARCH.links_results(page_content)
+length = len(results)
 
 if length > 1:
 
-    print("multiple results, specify more its search")
+    SEARCH.list_creator(results)
 
 else:
 

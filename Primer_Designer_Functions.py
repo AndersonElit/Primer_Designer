@@ -43,17 +43,27 @@ class SEARCH:
 
         table_results = page_content.find_all('tr', class_ = 'rprt')
         # get links
-        links = []
+        data = []
 
         for item in table_results:
 
+            # get link
             link = 'https://www.ncbi.nlm.nih.gov'
             tds = item.find_all('td')
             href = tds[0].a['href']
             link += href
-            links.append(link)
 
-        return links
+            # get title_gene
+            title_gene = tds[1].text
+
+            # get gene_id
+            gene_id = href[6:]
+
+            # put data together
+            data_set = [title_gene, gene_id, link]
+            data.append(data_set)
+
+        return data
 
     def links_genbank_fasta_protein(links):
 
@@ -102,6 +112,59 @@ class SEARCH:
             data_set.append(data)
 
         return data_set
+
+    def list_creator(results):
+
+        # open home.html
+        inf = open('templates/reference.html', 'r')
+        soup = BeautifulSoup(inf)
+        cont = 1
+
+        for item in results:
+
+            tr = BeautifulSoup("<tr></tr>")
+            tr_tag = tr.tr
+
+            # item num
+            th = BeautifulSoup("<th scope='row'></th>")
+            th_tag = th.th
+            th_tag.string = str(cont)
+            tr_tag.append(th_tag)
+
+            # gene name
+            gene_name = item[0]
+            td_gene = BeautifulSoup("<td></td>")
+            td_gene_tag = td_gene.td
+            td_gene_tag.string = gene_name
+            tr_tag.append(td_gene_tag)
+
+            # gene id
+            ID = item[1]
+            link = item[2]
+            td_id = BeautifulSoup("<td></td>")
+            td_id_tag = td_id.td
+            a = "<a href='" + link + "' target='_blank'>" + ID + "</a>"
+            a_id = BeautifulSoup(a)
+            a_id_tag = a_id.a
+            td_id_tag.append(a_id_tag)
+            tr_tag.append(td_id_tag)
+
+            # button
+            td_button = BeautifulSoup("<td></td>")
+            td_button_tag = td_button.td
+            button = BeautifulSoup("<button type='submit' class='btn btn-dark mr-2 font-weight-bolder wordstyle1 btn-sm'>Generar primers</button>")
+            button_tag = button.button
+            td_button_tag.append(button_tag)
+            tr_tag.append(td_button_tag)
+
+            # insert main html
+            soup.tbody.append(tr_tag)
+
+            cont += 1
+
+        # create results.html e insertar html modificado
+        new_html = open('templates/results.html', 'w+')
+        new_html.write(str(soup))        
 
 class PRIMER_DESIGN:
 

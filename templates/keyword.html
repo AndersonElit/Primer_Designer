@@ -31,11 +31,11 @@
         <div class="col">
             <div class="container">
                 <div class="form-group">
-                    <form action="submit" method="POST">
+                    <form action="/results" method="POST">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control mt-2 ml-2" placeholder="Ingresa nombre(s) del gen + organismo(s)" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="text" formaction="/results" class="form-control mt-2 ml-2" placeholder="Ingresa nombre(s) del gen + organismo(s)" aria-label="Recipient's username" aria-describedby="basic-addon2" name="text">
                             <div class="input-group-append">
-                                <a href="#" class="btn btn-dark mt-2 mr-2 float-right font-weight-bolder wordstyle1">Generar primers</a>
+                                <a href="/results" type="submit" class="btn btn-dark mt-2 mr-2 float-right font-weight-bolder wordstyle1">Generar primers</a>
                             </div>
                         </div>
                     </form>

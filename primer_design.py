@@ -1,6 +1,6 @@
 from Primer_Designer_Functions import SEARCH, PRIMER_DESIGN, IN_SILICO_PCR
 
-keyword = "ORF7b coronavirus"
+keyword = "ORF7b coronavirus homo sapiens"
 
 # searching
 webpage = SEARCH.searcher(keyword)

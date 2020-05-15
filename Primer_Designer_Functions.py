@@ -469,7 +469,7 @@ class IN_SILICO_PCR:
                 lines.append(line)
                 cont += 1
             
-            product_pair = [product_leght, product, complement_product, lines]
+            product_pair = [pair, product_leght, product, complement_product, lines]
             product_list.append(product_pair)
 
         return product_list

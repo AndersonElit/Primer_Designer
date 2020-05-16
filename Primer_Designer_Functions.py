@@ -112,7 +112,7 @@ class SEARCH:
             data_set.append(data)
 
         return data_set
-
+'''
     def list_creator(results):
 
         # open home.html
@@ -164,7 +164,8 @@ class SEARCH:
 
         # create results.html e insertar html modificado
         new_html = open('templates/results.html', 'w+')
-        new_html.write(str(soup))        
+        new_html.write(str(soup))
+'''      
 
 class PRIMER_DESIGN:
 

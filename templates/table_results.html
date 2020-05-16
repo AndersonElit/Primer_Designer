@@ -58,16 +58,16 @@
                             </thead>
                             <tbody>
                                 {%for i in range(0, length_results2)%}
-                                    <tr>
-                                        <th scope="row">{{ i }}</th>
-                                        <td>{{ results2[i][0] }}</td>
-                                        <td>
-                                            <a href="{{ results2[i][2] }}" target="_blank">{{ results2[i][1] }}</a>
-                                        </td>
-                                        <td>
-                                            <button type='submit' class='btn btn-dark mr-2 font-weight-bolder wordstyle1 btn-sm'>Generar primers</button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <th scope="row">{{ i }}</th>
+                                            <td>{{ results2[i][0] }}</td>
+                                            <td>
+                                                <a href="{{ results2[i][2] }}" target="_blank" name="id_gene">{{ results2[i][1] }}</a>
+                                            </td>
+                                            <td>
+                                                <button type='submit' class='btn btn-dark mr-2 font-weight-bolder wordstyle1 btn-sm'>Generar primers</button>
+                                            </td>
+                                        </tr> 
                                 {%endfor%}
                             </tbody>
                         </table>

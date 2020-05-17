@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from Primer_Designer_Functions import SEARCH, PRIMER_DESIGN, IN_SILICO_PCR
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 
@@ -61,21 +63,39 @@ def results():
 @app.route('/results_fasta', methods=['POST'])
 def results_fasta():
     seq = request.form.get('text')
-    list = seq.split('\n')
-    seq_title = list[0]
-    fragments = list[1:]
-    sequence = ''
+    f = request.files['file']
+    list_file = str(f)
+    list_file2 = list_file.split(' ')
 
-    for fragment in fragments:
-        found = fragment.find('\r')
-        if found == -1:
-            sequence += fragment
-        else:
-            new_fragment = fragment.replace('\r','')
-            sequence += new_fragment
+    def seq_assemble(fasta):
+        list = fasta.split('\n')
+        seq_title = list[0]
+        fragments = list[1:]
+        sequence = ''
+        for fragment in fragments:
+            found = fragment.find('\r')
+            if found == -1:
+                sequence += fragment
+            else:
+                new_fragment = fragment.replace('\r','')
+                sequence += new_fragment
+        return sequence
 
-    all_results = analysis(sequence)
-    return render_template('analysis_fasta.html', all_results=all_results)
+    if list_file2[1] == "''":
+        full_seq = seq_assemble(seq)
+        all_results = analysis(full_seq)
+        return render_template('analysis_fasta.html', all_results=all_results)
+    else:
+        f.save(secure_filename(f.filename))
+        lenf = len(list_file2[1]) - 1
+        filen = list_file2[1][1:lenf]
+        fileopen = open(filen, 'r')
+        content = str(fileopen.read())
+        fileopen.close()
+        os.remove(filen)
+        full_seq = seq_assemble(content)
+        all_results = analysis(full_seq)
+        return render_template('analysis_fasta.html', all_results=all_results)
 
 if __name__ == '__main__':
     app.run(debug=True)

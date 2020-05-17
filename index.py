@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('keyword.html')
+    return render_template('fastaseq.html')
 
 @app.route('/keyword')
 def keyword():
@@ -20,9 +20,8 @@ def fastaseq():
     return render_template('fastaseq.html')
 
 # def function
-def analysis(page_content):
+def analysis(fasta_seq):
     # Design primers
-    fasta_seq = PRIMER_DESIGN.get_fasta(page_content)
     dictionary = PRIMER_DESIGN.PRIMER3(fasta_seq)
     Primers_Tm_GC = PRIMER_DESIGN.primers_tm_gc(dictionary)
     Hairpins_calc = PRIMER_DESIGN.Hairpins(Primers_Tm_GC)
@@ -46,7 +45,8 @@ def results():
         flash("No items found!")
         return redirect(url_for('keyword'))
     elif length == 1:
-        all_results = analysis(page_content)
+        fasta_seq = PRIMER_DESIGN.get_fasta(page_content)
+        all_results = analysis(fasta_seq)
         return render_template('analysis.html', all_results=all_results)
     else:
         if length > 10:
@@ -57,6 +57,25 @@ def results():
             results2 = results
             length_results2 = len(results2)
             return render_template('table_results.html', results2=results2, length_results2=length_results2)
+
+@app.route('/results_fasta', methods=['POST'])
+def results_fasta():
+    seq = request.form.get('text')
+    list = seq.split('\n')
+    seq_title = list[0]
+    fragments = list[1:]
+    sequence = ''
+
+    for fragment in fragments:
+        found = fragment.find('\r')
+        if found == -1:
+            sequence += fragment
+        else:
+            new_fragment = fragment.replace('\r','')
+            sequence += new_fragment
+
+    all_results = analysis(sequence)
+    return render_template('analysis_fasta.html', all_results=all_results)
 
 if __name__ == '__main__':
     app.run(debug=True)

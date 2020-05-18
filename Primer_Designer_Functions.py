@@ -4,6 +4,8 @@ import primer3
 from bash import bash
 from Bio.Seq import Seq
 from Bio import Entrez, SeqIO
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 class SEARCH:
     
@@ -371,6 +373,49 @@ class PRIMER_DESIGN:
             data_set.append(data)
 
         return data_set
+
+################################oligoanalyzer##################################
+
+class primer_analysis:
+
+    def oligoanalyzer():
+
+        driver = webdriver.Firefox()
+        driver.get('https://www.idtdna.com/site/account/login?returnurl=%2Fcalc%2Fanalyzer%2F')
+        #login
+        username = driver.find_element_by_id('UserName')
+        password = driver.find_element_by_id('Password')
+        button = driver.find_element_by_id('login-button')
+        username.send_keys("AndersonElit")
+        password.send_keys("Anderlit89")
+        button.click()
+        #######hairpin homodimer forward######
+        primerf = driver.find_element_by_id('textarea-sequence')
+        forward = 'GCCTTGCGAATGAATGTGCT'
+        primerf.send_keys(forward)
+        # calc and extract hairpin results
+        hairpin_btn = driver.find_element_by_xpath('//button[text()="Hairpin"]')
+        hairpin_btn.click()
+        pagehairpin = driver.page_source
+        soup = BeautifulSoup(pagehairpin, 'html5lib')
+        tables_hairpin = soup.find_all('table', class_ = 'table')
+        img_hairpin = tables_hairpin[3].find_all('img', class_ = 'imageThumb')
+        imgs_hairpins_src = [img_hairpin[0]['src'], img_hairpin[3]['src']]
+        trs = table_hairpin[3].find_all('tr')
+        tds1 = trs[1].find_all('td')
+        tds2 = trs[2].find_all('td')
+        dGs_hairpin = [tds1[2].text, tds2[2].text]
+        # calc and extract homodimer results
+        homo_btn = driver.find_element_by_xpath('//button[text()="Self-Dimer"]')
+        homo_btn.click()
+        pagehomof =  driver.page_source
+        souphomof = BeautifulSoup(pagehomof, 'html5lib')
+        results_homof = souphomof.find_all('div', class_ = 'well')
+        spans1 = results_homof[6].find_all('span')
+        spans2 = results_homof[7].find_all('span')
+        spans3 = results_homof[8].find_all('span')
+        dGs_homof = [spans1[0].text, spans2[0].text, spans3[0].text]
+        homodimersf = [spans1[2].text, spans2[2].text, spans3[2].text]
 
 class IN_SILICO_PCR:
 

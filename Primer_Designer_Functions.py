@@ -401,7 +401,7 @@ class primer_analysis:
         tables_hairpin = soup.find_all('table', class_ = 'table')
         img_hairpin = tables_hairpin[3].find_all('img', class_ = 'imageThumb')
         imgs_hairpins_src = [img_hairpin[0]['src'], img_hairpin[3]['src']]
-        trs = table_hairpin[3].find_all('tr')
+        trs = tables_hairpin[3].find_all('tr')
         tds1 = trs[1].find_all('td')
         tds2 = trs[2].find_all('td')
         dGs_hairpin = [tds1[2].text, tds2[2].text]
@@ -416,6 +416,22 @@ class primer_analysis:
         spans3 = results_homof[8].find_all('span')
         dGs_homof = [spans1[0].text, spans2[0].text, spans3[0].text]
         homodimersf = [spans1[2].text, spans2[2].text, spans3[2].text]
+        # calc and extract heterodimer results
+        hetero_btn = driver.find_element_by_xpath('//button[text()="Hetero-Dimer"]')
+        hetero_btn.click()
+        primerr = driver.find_elements_by_tag_name('textarea')[3]
+        primerr.send_keys(reverse)
+        calc_hetero_btn = driver.find_element_by_xpath('//button[text()="Calculate"]')
+        calc_hetero_btn.click()
+        pagehetero = driver.page_source
+        souphetero = BeautifulSoup(pagehetero, 'html5lib')
+        results_hetero = souphetero.find_all('div', class_ = 'well')
+        spanshetero1 = results_hetero[6].find_all('span')
+        spanshetero2 = results_hetero[7].find_all('span')
+        spanshetero3 = results_hetero[8].find_all('span')
+        dGs_hetero = [spanshetero1[0].text, spanshetero2[0].text, spanshetero3[0].text]
+        heterodimers = [spansheterodimer1[2].text, spansheterodimer2[2].text, spansheterodimer3[2].text]
+        driver.close()
 
 class IN_SILICO_PCR:
 

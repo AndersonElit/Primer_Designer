@@ -9,6 +9,7 @@ app = Flask(__name__)
 def home():
     return render_template('fastaseq.html')
 
+'''
 @app.route('/keyword')
 def keyword():
     return render_template('keyword.html')
@@ -20,21 +21,18 @@ def geneid():
 @app.route('/fastaseq')
 def fastaseq():
     return render_template('fastaseq.html')
+'''
 
 # def function
 def analysis(fasta_seq):
     # Design primers
     dictionary = PRIMER_DESIGN.PRIMER3(fasta_seq)
     Primers_Tm_GC = PRIMER_DESIGN.primers_tm_gc(dictionary)
-    Hairpins_calc = PRIMER_DESIGN.Hairpins(Primers_Tm_GC)
-    Homodimers_calc = PRIMER_DESIGN.Homodimers(Hairpins_calc)
-    Heterodimers_calc = PRIMER_DESIGN.Heterodimers(Homodimers_calc)
-    # In_silico PCR
-    primer_list = IN_SILICO_PCR.primers(Heterodimers_calc)
-    pcr_products = IN_SILICO_PCR.in_silico_pcr(primer_list, fasta_seq)
+    pcr_products = IN_SILICO_PCR.in_silico_pcr(Primers_Tm_GC, fasta_seq)
 
     return pcr_products
-    
+
+'''    
 @app.route('/results', methods=['POST'])
 def results():
     keyword = request.form.get('text')
@@ -59,6 +57,7 @@ def results():
             results2 = results
             length_results2 = len(results2)
             return render_template('table_results.html', results2=results2, length_results2=length_results2)
+'''
 
 @app.route('/results_fasta', methods=['POST'])
 def results_fasta():

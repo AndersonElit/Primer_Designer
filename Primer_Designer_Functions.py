@@ -361,26 +361,27 @@ class PRIMER_ANALYSIS:
 
     def oligoanalyzer(pcr_products):
 
+        
         driver = webdriver.Firefox()
         driver.get('https://www.idtdna.com/site/account/login?returnurl=%2Fcalc%2Fanalyzer%2F')
-        time.sleep(30)
+        time.sleep(5)
         print('cargo pagina')
         #login
         username = driver.find_element_by_id('UserName')
         password = driver.find_element_by_id('Password')
         button = driver.find_element_by_id('login-button')
         username.send_keys("AndersonElit")
-        time.sleep(5)
         password.send_keys("Anderlit89")
-        time.sleep(5)
         button.click()
-        time.sleep(30)
+        time.sleep(10)
         print('inicio de sesion')
         all_data = []
-
+        
+        
         for data_set in pcr_products:
             primers_data = []
             for primers in data_set[0][0]:
+                
                 data_fr = []
                 for primer in primers:
 
@@ -390,7 +391,7 @@ class PRIMER_ANALYSIS:
                     # calc and extract hairpin results
                     hairpin_btn = driver.find_element_by_xpath('//button[text()="Hairpin"]')
                     hairpin_btn.click()
-                    time.sleep(10)
+                    time.sleep(5)
                     pagehairpin = driver.page_source
                     soup = BeautifulSoup(pagehairpin, 'html5lib')
                     tables_hairpin = soup.find_all('table', class_ = 'table')
@@ -402,7 +403,7 @@ class PRIMER_ANALYSIS:
                     dGs_hairpin = [tds1[2].text, tds2[2].text]
                     hairpins_data = [imgs_hairpins_src, dGs_hairpin]
                     print('hairpins: ' + hairpins_data)
-                    
+                    '''                    
                     # calc and extract homodimer results
                     homo_btn = driver.find_element_by_xpath('//button[text()="Self-Dimer"]')
                     homo_btn.click()
@@ -449,11 +450,26 @@ class PRIMER_ANALYSIS:
                 # primer thermo data
                 setdata = [data_fr, heterodimers_data]
                 primers_data.append(setdata)
-            all_data.append(data_set, primers_data)
+                
+            #all_data.append(data_set, primers_data)
+        '''
 
         driver.close()
 
-        return all_data
+        #return all_data
+        print('analisis completado')
+        return pcr_products
+        
+
+class COTIZER:
+
+    def IDT(pcr_products):
+
+        return pcr_products
+
+        
+
+    
 
           
     

@@ -373,89 +373,81 @@ class PRIMER_ANALYSIS:
         username.send_keys("AndersonElit")
         password.send_keys("Anderlit89")
         button.click()
-        time.sleep(10)
+        time.sleep(30)
         print('inicio de sesion')
         all_data = []
         
-        
         for data_set in pcr_products:
             primers_data = []
-            for primers in data_set[0][0]:
-                
-                data_fr = []
-                for primer in primers:
+            primers = data_set[0][0]
+            for primer in primers:
 
-                    textboxprimer = driver.find_element_by_id('textarea-sequence')
-                    textboxprimer.send_keys(primer)
+                textboxprimer = driver.find_element_by_id('textarea-sequence')
+                textboxprimer.send_keys(primer)
 
-                    # calc and extract hairpin results
-                    hairpin_btn = driver.find_element_by_xpath('//button[text()="Hairpin"]')
-                    hairpin_btn.click()
-                    time.sleep(5)
-                    pagehairpin = driver.page_source
-                    soup = BeautifulSoup(pagehairpin, 'html5lib')
-                    tables_hairpin = soup.find_all('table', class_ = 'table')
-                    img_hairpin = tables_hairpin[3].find_all('img', class_ = 'imageThumb')
-                    imgs_hairpins_src = [img_hairpin[0]['src'], img_hairpin[3]['src']]
-                    trs = tables_hairpin[3].find_all('tr')
-                    tds1 = trs[1].find_all('td')
-                    tds2 = trs[2].find_all('td')
-                    dGs_hairpin = [tds1[2].text, tds2[2].text]
-                    hairpins_data = [imgs_hairpins_src, dGs_hairpin]
-                    print('hairpins: ' + hairpins_data)
-                    '''                    
-                    # calc and extract homodimer results
-                    homo_btn = driver.find_element_by_xpath('//button[text()="Self-Dimer"]')
-                    homo_btn.click()
-                    time.sleep(10)
-                    pagehomo =  driver.page_source
-                    souphomo = BeautifulSoup(pagehomo, 'html5lib')
-                    results_homo = souphomo.find_all('div', class_ = 'well')
-                    spans1 = results_homo[6].find_all('span')
-                    spans2 = results_homo[7].find_all('span')
-                    spans3 = results_homo[8].find_all('span')
-                    dGs_homo = [spans1[0].text, spans2[0].text, spans3[0].text]
-                    homodimers = [spans1[2].text, spans2[2].text, spans3[2].text]
-                    homodimers_data = [dGs_homo, homodimers]
-                    print('homodimers: ' + homodimers_data)
+                # calc and extract hairpin results
+                hairpin_btn = driver.find_element_by_xpath('//button[text()="Hairpin"]')
+                hairpin_btn.click()
+                time.sleep(5)
+                pagehairpin = driver.page_source
+                soup = BeautifulSoup(pagehairpin, 'html5lib')
+                tables_hairpin = soup.find_all('table', class_ = 'table')
+                img_hairpin = tables_hairpin[3].find_all('img', class_ = 'imageThumb')
+                imgs_hairpins_src = [img_hairpin[0]['src'], img_hairpin[3]['src']]
+                trs = tables_hairpin[3].find_all('tr')
+                tds1 = trs[1].find_all('td')
+                tds2 = trs[2].find_all('td')
+                dGs_hairpin = [tds1[2].text, tds2[2].text]
+                hairpins_data = [imgs_hairpins_src, dGs_hairpin]
+                                    
+                # calc and extract homodimer results
+                homo_btn = driver.find_element_by_xpath('//button[text()="Self-Dimer"]')
+                homo_btn.click()
+                time.sleep(5)
+                pagehomo =  driver.page_source
+                souphomo = BeautifulSoup(pagehomo, 'html5lib')
+                results_homo = souphomo.find_all('div', class_ = 'well')
+                spans1 = results_homo[6].find_all('span')
+                spans2 = results_homo[7].find_all('span')
+                spans3 = results_homo[8].find_all('span')
+                dGs_homo = [spans1[0].text, spans2[0].text, spans3[0].text]
+                homodimers = [spans1[2].text, spans2[2].text, spans3[2].text]
+                homodimers_data = [dGs_homo, homodimers]
 
-                    # primer data hairpin homodimer
-                    primer_data1 = [hairpins_data, homodimers_data]
-                    data_fr.append(primer_data1)
-
-                    textboxprimer.clear()
+                # primer data hairpin homodimer
+                primer_data1 = [hairpins_data, homodimers_data]
+                primers_data.append(primer_data1)
+                textboxprimer.clear()
                     
-                # calc and extract heterodimer results
-                textboxprimerf = driver.find_element_by_id('textarea-sequence')
-                textboxprimerf.send_keys(primers[0])
-                hetero_btn = driver.find_element_by_xpath('//button[text()="Hetero-Dimer"]')
-                hetero_btn.click()
-                time.sleep(10)
-                primerr = driver.find_elements_by_tag_name('textarea')[3]
-                primerr.send_keys(primers[1])
-                calc_hetero_btn = driver.find_element_by_xpath('//button[text()="Calculate"]')
-                calc_hetero_btn.click()
-                time.sleep(10)
-                pagehetero = driver.page_source
-                souphetero = BeautifulSoup(pagehetero, 'html5lib')
-                results_hetero = souphetero.find_all('div', class_ = 'well')
-                spanshetero1 = results_hetero[6].find_all('span')
-                spanshetero2 = results_hetero[7].find_all('span')
-                spanshetero3 = results_hetero[8].find_all('span')
-                dGs_hetero = [spanshetero1[0].text, spanshetero2[0].text, spanshetero3[0].text]
-                heterodimers = [spansheterodimer1[2].text, spansheterodimer2[2].text, spansheterodimer3[2].text]
-                heterodimers_data = [dGs_hetero, heterodimers]
-                print('heterodimers: ' + heterodimers_data)
+            # calc and extract heterodimer results
+            textboxprimerf = driver.find_element_by_id('textarea-sequence')
+            textboxprimerf.send_keys(primers[0])
+            hetero_btn = driver.find_element_by_xpath('//button[text()="Hetero-Dimer"]')
+            hetero_btn.click()
+            time.sleep(10)
+            primerr = driver.find_elements_by_tag_name('textarea')[3]
+            primerr.send_keys(primers[1])
+            calc_hetero_btn = driver.find_element_by_xpath('//button[text()="Calculate"]')
+            calc_hetero_btn.click()
+            time.sleep(10)
+            pagehetero = driver.page_source
+            souphetero = BeautifulSoup(pagehetero, 'html5lib')
+            results_hetero = souphetero.find_all('div', class_ = 'well')
+            spanshetero1 = results_hetero[6].find_all('span')
+            spanshetero2 = results_hetero[7].find_all('span')
+            spanshetero3 = results_hetero[8].find_all('span')
+            dGs_hetero = [spanshetero1[0].text, spanshetero2[0].text, spanshetero3[0].text]
+            heterodimers = [spanshetero1[2].text, spanshetero2[2].text, spanshetero3[2].text]
+            heterodimers_data = [dGs_hetero, heterodimers]
 
-                # primer thermo data
-                setdata = [data_fr, heterodimers_data]
-                primers_data.append(setdata)
-                
-            #all_data.append(data_set, primers_data)
-        '''
-
+            # primer thermo data
+            setdata = [data_fr, heterodimers_data]
+            primers_data.append(setdata)
+            all_data.append(primers_data)
+            textboxprimerf.clear()
+            print('resultados: ' + str(all_data))
+            
         driver.close()
-
         #return all_data
         print('analisis completado')
         return pcr_products

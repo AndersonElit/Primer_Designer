@@ -364,7 +364,7 @@ class PRIMER_ANALYSIS:
         
         driver = webdriver.Firefox()
         driver.get('https://www.idtdna.com/site/account/login?returnurl=%2Fcalc%2Fanalyzer%2F')
-        time.sleep(5)
+        time.sleep(15)
         print('cargo pagina')
         #login
         username = driver.find_element_by_id('UserName')
@@ -388,7 +388,7 @@ class PRIMER_ANALYSIS:
                 # calc and extract hairpin results
                 hairpin_btn = driver.find_element_by_xpath('//button[text()="Hairpin"]')
                 hairpin_btn.click()
-                time.sleep(5)
+                time.sleep(30)
                 pagehairpin = driver.page_source
                 soup = BeautifulSoup(pagehairpin, 'html5lib')
                 tables_hairpin = soup.find_all('table', class_ = 'table')
@@ -403,7 +403,7 @@ class PRIMER_ANALYSIS:
                 # calc and extract homodimer results
                 homo_btn = driver.find_element_by_xpath('//button[text()="Self-Dimer"]')
                 homo_btn.click()
-                time.sleep(5)
+                time.sleep(30)
                 pagehomo =  driver.page_source
                 souphomo = BeautifulSoup(pagehomo, 'html5lib')
                 results_homo = souphomo.find_all('div', class_ = 'well')
@@ -424,12 +424,12 @@ class PRIMER_ANALYSIS:
             textboxprimerf.send_keys(primers[0])
             hetero_btn = driver.find_element_by_xpath('//button[text()="Hetero-Dimer"]')
             hetero_btn.click()
-            time.sleep(10)
+            time.sleep(30)
             primerr = driver.find_elements_by_tag_name('textarea')[3]
             primerr.send_keys(primers[1])
             calc_hetero_btn = driver.find_element_by_xpath('//button[text()="Calculate"]')
             calc_hetero_btn.click()
-            time.sleep(10)
+            time.sleep(30)
             pagehetero = driver.page_source
             souphetero = BeautifulSoup(pagehetero, 'html5lib')
             results_hetero = souphetero.find_all('div', class_ = 'well')
@@ -441,7 +441,7 @@ class PRIMER_ANALYSIS:
             heterodimers_data = [dGs_hetero, heterodimers]
 
             # primer thermo data
-            setdata = [data_fr, heterodimers_data]
+            setdata = [primers_data, heterodimers_data]
             primers_data.append(setdata)
             all_data.append(primers_data)
             textboxprimerf.clear()

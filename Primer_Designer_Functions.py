@@ -6,6 +6,8 @@ from Bio.Seq import Seq
 from Bio import Entrez, SeqIO
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
 import time
 
 class SEARCH:
@@ -364,17 +366,34 @@ class PRIMER_ANALYSIS:
         
         driver = webdriver.Firefox()
         driver.get('https://www.idtdna.com/site/account/login?returnurl=%2Fcalc%2Fanalyzer%2F')
-        time.sleep(15)
         print('cargo pagina')
+        wait = WebDriverWait(driver, 30)
         #login
+        '''
         username = driver.find_element_by_id('UserName')
         password = driver.find_element_by_id('Password')
         button = driver.find_element_by_id('login-button')
+        '''
+        username = wait.until(ec.presence_of_element_located((By.ID, 'UserName')))
         username.send_keys("AndersonElit")
+        password = wait.until(ec.presence_of_element_located((By.ID, 'Password')))
         password.send_keys("Anderlit89")
+        button = wait.until(ec.presence_of_element_located((By.ID, 'login-button')))
         button.click()
-        time.sleep(30)
+        time.sleep(20)
         print('inicio de sesion')
+        
+        cookie = driver.find_elements_by_css_selector("a.cc-btn.cc-dismiss")
+        lencookie = len(cookie)
+        print(lencookie)
+                
+        if lencookie > 0:
+            cookiebtn = driver.find_element_by_css_selector("a.cc-btn.cc-dismiss")
+            time.sleep(10)
+            cookiebtn.click()
+            
+        driver.refresh()
+        time.sleep(10)
         all_data = []
         
         for data_set in pcr_products:
@@ -382,11 +401,30 @@ class PRIMER_ANALYSIS:
             primers = data_set[0][0]
             for primer in primers:
 
+                #textboxprimer = wait.until(ec.presence_of_element_located((By.ID, 'textarea-sequence')))
+                driver.refresh()
+                time.sleep(30)
+                textboxprimerp = driver.find_elements_by_id('textarea-sequence')               
+                found = len(textboxprimerp)
+                count = 1
+
+                while found == 0:
+
+                    driver.refresh()
+                    time.sleep(10)
+                    textboxprimer2 = driver.find_elements_by_id('textarea-sequence')
+                    found2 = len(textboxprimer2)
+                    if found2 > 0:
+                        found += 1
+                    print('contador hairpin homodimer: ' + str(count))
+                    count += 1
+
+                print('textarea-sequence hairpin homodimers encontrado!!!!!!!!')               
                 textboxprimer = driver.find_element_by_id('textarea-sequence')
                 textboxprimer.send_keys(primer)
-
                 # calc and extract hairpin results
-                hairpin_btn = driver.find_element_by_xpath('//button[text()="Hairpin"]')
+                #hairpin_btn = driver.find_element_by_xpath('//button[text()="Hairpin"]')
+                hairpin_btn = wait.until(ec.presence_of_element_located((By.XPATH, '//button[text()="Hairpin"]')))
                 hairpin_btn.click()
                 time.sleep(30)
                 pagehairpin = driver.page_source
@@ -401,7 +439,8 @@ class PRIMER_ANALYSIS:
                 hairpins_data = [imgs_hairpins_src, dGs_hairpin]
                                     
                 # calc and extract homodimer results
-                homo_btn = driver.find_element_by_xpath('//button[text()="Self-Dimer"]')
+                #homo_btn = driver.find_element_by_xpath('//button[text()="Self-Dimer"]')
+                homo_btn = wait.until(ec.presence_of_element_located((By.XPATH, '//button[text()="Self-Dimer"]')))
                 homo_btn.click()
                 time.sleep(30)
                 pagehomo =  driver.page_source
@@ -418,16 +457,45 @@ class PRIMER_ANALYSIS:
                 primer_data1 = [hairpins_data, homodimers_data]
                 primers_data.append(primer_data1)
                 textboxprimer.clear()
-                    
+                
             # calc and extract heterodimer results
+            driver.refresh()
+            time.sleep(30)
             textboxprimerf = driver.find_element_by_id('textarea-sequence')
             textboxprimerf.send_keys(primers[0])
-            hetero_btn = driver.find_element_by_xpath('//button[text()="Hetero-Dimer"]')
+            #hetero_btn = driver.find_element_by_xpath('//button[text()="Hetero-Dimer"]')
+            hetero_btn = wait.until(ec.presence_of_element_located((By.XPATH, '//button[text()="Hetero-Dimer"]')))
             hetero_btn.click()
-            time.sleep(30)
-            primerr = driver.find_elements_by_tag_name('textarea')[3]
-            primerr.send_keys(primers[1])
-            calc_hetero_btn = driver.find_element_by_xpath('//button[text()="Calculate"]')
+            time.sleep(20)
+            listextarea = driver.find_elements_by_tag_name('textarea')
+            length = len(listextarea)
+            print('componentes: ' + str(listextarea))
+            print('longitud textarea: ' + str(length))
+            
+            count = 1
+
+            while length == 2:
+
+                driver.refresh()
+                time.sleep(20)
+                hetero_btn2 = wait.until(ec.presence_of_element_located((By.XPATH, '//button[text()="Hetero-Dimer"]')))
+                hetero_btn2.click()
+                time.sleep(20)
+                listextarea2 = driver.find_elements_by_tag_name('textarea')
+                length2 = len(listextarea)
+                if length2 > 2:
+                    length = length2
+                print('contador: ' + str(count))
+                count += 1
+
+            print('tagname encontrado!!!!!')
+            
+            primerr = driver.find_elements_by_tag_name('textarea')[2]
+            #print(primerr)
+            primerr.send_keys(primers[1])        
+            calc_hetero_btn = wait.until(ec.presence_of_element_located((By.XPATH, '//button[text()="Calculate"]')))
+            #calc_hetero_btn = driver.find_element_by_xpath('//button[text()="Calculate"]')
+            #driver.execute_script("arguments[0].click();", calc_hetero_btn)
             calc_hetero_btn.click()
             time.sleep(30)
             pagehetero = driver.page_source
@@ -445,12 +513,13 @@ class PRIMER_ANALYSIS:
             primers_data.append(setdata)
             all_data.append(primers_data)
             textboxprimerf.clear()
-            print('resultados: ' + str(all_data))
-            
+            print('\nresultados: ' + str(all_data))
+                        
+        time.sleep(30)
         driver.close()
         #return all_data
         print('analisis completado')
-        return pcr_products
+        return all_data
         
 
 class COTIZER:

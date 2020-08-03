@@ -44,23 +44,36 @@
         </div>
     </div>
     <div class="container mt-2">
-        <div class="row">
-            <div class="col">
-                <div class="container">
-                    <div class="form-group">
-                        <form action="{{ url_for('fastaseq') }}">
-                            {% for result in all_results %}                        
-                            <h1>{{ result }}</h1>
-                            {% endfor %}
-                        </form>
+        <div class="form-group">
+            <form action="{{ url_for('fastaseq') }}">
+                {% for result in all_results %}
+                <!--
+                <table class="table table-hover">{{ result[0][0] }}</table>
+                -->
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">forward</h5>
+                                <p class="card-text">{{ result[0][0][0] }}</p>
+                                <h5 class="card-title">reverse</h5>
+                                <p class="card-text">{{ result[0][0][1] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">producto</h5>
+                                <p class="card-text">{{ result[2] }}</p>
+                                <p class="card-text">{{ result[3] }}</p>
+                                <p class="card-text">{{ result[4] }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="container">
-
-                </div>
-            </div>
+                {% endfor %}
+            </form>
         </div>
     </div>
 

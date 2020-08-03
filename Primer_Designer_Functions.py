@@ -362,27 +362,18 @@ class IN_SILICO_PCR:
 class PRIMER_ANALYSIS:
 
     def oligoanalyzer(pcr_products):
-
         
         driver = webdriver.Firefox()
         driver.get('https://www.idtdna.com/site/account/login?returnurl=%2Fcalc%2Fanalyzer%2F')
         print('cargo pagina')
         wait = WebDriverWait(driver, 30)
+        time.sleep(20)
         #login
         '''
         username = driver.find_element_by_id('UserName')
         password = driver.find_element_by_id('Password')
         button = driver.find_element_by_id('login-button')
         '''
-        username = wait.until(ec.presence_of_element_located((By.ID, 'UserName')))
-        username.send_keys("AndersonElit")
-        password = wait.until(ec.presence_of_element_located((By.ID, 'Password')))
-        password.send_keys("Anderlit89")
-        button = wait.until(ec.presence_of_element_located((By.ID, 'login-button')))
-        button.click()
-        time.sleep(20)
-        print('inicio de sesion')
-        
         cookie = driver.find_elements_by_css_selector("a.cc-btn.cc-dismiss")
         lencookie = len(cookie)
         print(lencookie)
@@ -391,6 +382,28 @@ class PRIMER_ANALYSIS:
             cookiebtn = driver.find_element_by_css_selector("a.cc-btn.cc-dismiss")
             time.sleep(10)
             cookiebtn.click()
+
+        time.sleep(20)
+        
+        username = wait.until(ec.presence_of_element_located((By.ID, 'UserName')))
+        username.send_keys("AndersonElit")
+        password = wait.until(ec.presence_of_element_located((By.ID, 'Password')))
+        password.send_keys("Anderlit89")
+        button = wait.until(ec.presence_of_element_located((By.ID, 'login-button')))
+        button.click()
+        time.sleep(20)
+        print('inicio de sesion')
+
+        '''        
+        cookie = driver.find_elements_by_css_selector("a.cc-btn.cc-dismiss")
+        lencookie = len(cookie)
+        print(lencookie)
+                
+        if lencookie > 0:
+            cookiebtn = driver.find_element_by_css_selector("a.cc-btn.cc-dismiss")
+            time.sleep(10)
+            cookiebtn.click()
+        '''
             
         driver.refresh()
         time.sleep(10)

@@ -9,7 +9,7 @@ app = Flask(__name__)
 def home():
     return render_template('fastaseq.html')
 
-'''
+
 @app.route('/keyword')
 def keyword():
     return render_template('keyword.html')
@@ -21,7 +21,6 @@ def geneid():
 @app.route('/fastaseq')
 def fastaseq():
     return render_template('fastaseq.html')
-'''
 
 # def function
 def analysis(fasta_seq):

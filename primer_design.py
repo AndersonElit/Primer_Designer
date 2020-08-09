@@ -25,6 +25,9 @@ else:
     # oligoanalyzer
     thermo_analysis = PRIMER_ANALYSIS.oligoanalyzer(pcr_products)
 
+    #cotizer
+    IDT_prices = COTIZER.IDT(pcr_products)
+
     
     
     

@@ -1995,3 +1995,20 @@ JavaScript error: resource:///modules/sessionstore/SessionStore.jsm, line 1325: 
 1596346040971	Marionette	WARN	TLS certificate errors will be ignored for this session
 1596347556954	Marionette	INFO	Stopped listening on port 38065
 [Parent 4351, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /build/firefox-esr-q0MF88/firefox-esr-68.10.0esr/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 727
+1596950531876	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileEuDJfh"
+1596950533512	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1596950533515	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1596950533516	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1596950533516	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+Sandbox: seccomp sandbox violation: pid 2087, tid 2087, syscall 315, args 2087 140545187424512 56 0 27 140545187424512.
+Sandbox: seccomp sandbox violation: pid 2109, tid 2109, syscall 315, args 2109 140203881151424 56 0 16 140203881151424.
+JavaScript error: undefined, line 14: Error: An unexpected error occurred
+JavaScript error: moz-extension://f59a6d2a-b660-4056-8a26-dd250a87acf3/lib/picture_in_picture_overrides.js, line 15: Error: Incorrect argument types for pictureInPictureParent.setOverrides.
+JavaScript error: resource:///modules/sessionstore/SessionStore.jsm, line 1325: uncaught exception: 2147746065
+1596950537896	Marionette	INFO	Listening on port 42637
+1596950537956	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.warn: "Error while detaching the thread front: 'detach' request packet to 'server1.conn0.child1/context18' can't be sent as the connection is closed."
+console.warn: "Error while detaching the thread front: 'detach' request packet to 'server1.conn1.child1/context18' can't be sent as the connection is closed."
+console.warn: "Error while detaching the thread front: 'detach' request packet to 'server1.conn2.child1/context18' can't be sent as the connection is closed."
+[Parent 2030, Gecko_IOThread] WARNING: pipe error (110): Connection reset by peer: file /build/firefox-esr-q0MF88/firefox-esr-68.10.0esr/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 358
+1596955472218	Marionette	INFO	Stopped listening on port 42637

@@ -393,18 +393,6 @@ class PRIMER_ANALYSIS:
         button.click()
         time.sleep(20)
         print('inicio de sesion')
-
-        '''        
-        cookie = driver.find_elements_by_css_selector("a.cc-btn.cc-dismiss")
-        lencookie = len(cookie)
-        print(lencookie)
-                
-        if lencookie > 0:
-            cookiebtn = driver.find_element_by_css_selector("a.cc-btn.cc-dismiss")
-            time.sleep(10)
-            cookiebtn.click()
-        '''
-            
         driver.refresh()
         time.sleep(10)
         all_data = []
@@ -539,7 +527,91 @@ class COTIZER:
 
     def IDT(pcr_products):
 
-        return pcr_products
+        driver = webdriver.Firefox()
+        driver.get('https://www.idtdna.com/site/account/login?returnurl=%2Fcalc%2Fanalyzer%2F')
+        print('cargo pagina')
+        wait = WebDriverWait(driver, 30)
+
+        cookie = driver.find_elements_by_css_selector("a.cc-btn.cc-dismiss")
+        lencookie = len(cookie)
+        print(lencookie)
+                
+        if lencookie > 0:
+            cookiebtn = driver.find_element_by_css_selector("a.cc-btn.cc-dismiss")
+            time.sleep(10)
+            cookiebtn.click()
+
+        time.sleep(20)
+        
+        username = wait.until(ec.presence_of_element_located((By.ID, 'UserName')))
+        username.send_keys("AndersonElit")
+        password = wait.until(ec.presence_of_element_located((By.ID, 'Password')))
+        password.send_keys("Anderlit89")
+        button = wait.until(ec.presence_of_element_located((By.ID, 'login-button')))
+        button.click()
+        time.sleep(20)
+        print('inicio de sesion')
+        driver.refresh()
+        time.sleep(10)
+        all_prices = []
+
+        for data_set in pcr_products:
+            
+            primerf = data_set[0][0][0]
+            primerr = data_set[0][0][1]
+            time.sleep(30)
+            textboxprimer = driver.find_element_by_id('textarea-sequence')
+            textboxprimer.send_keys(primerf)
+            add_order_btn = driver.find_element_by_id('oa-btn-addtoorder')
+            add_order_btn.click()
+            time.sleep(10)
+            name_input = driver.find_element_by_id('Name1')
+            name_input.send_keys('primer1')
+            add_to_order_btn = driver.find_element_by_id('deny')
+            add_to_order_btn.click()
+            time.sleep(30)
+            driver.back()
+            driver.back()
+            textboxprimer = driver.find_element_by_id('textarea-sequence')
+            textboxprimer.clear()
+            textboxprimer.send_keys(primerr)
+            add_order_btn = driver.find_element_by_id('oa-btn-addtoorder')
+            add_order_btn.click()
+            name_input = driver.find_element_by_id('Name1')
+            name_input.send_keys('primer2')
+            add_to_order_btn = driver.find_element_by_id('deny')
+            add_to_order_btn.click()
+            time.sleep(30)
+            pageprice = driver.page_source
+            soupprice = BeautifulSoup(pageprice, 'html5lib')
+            result_price = soupprice.find_all('div', class_ = 'col-sm-7')
+            listh5 = result_price[0].find_all('h5')
+            price_primers = listh5[0].text
+            all_prices.append(price_primers)
+            checkbox = driver.find_element_by_id('CheckoutSelect')
+            checkbox.click()
+            delete_btn = driver.find_element_by_css_selector("button.btn.btn-default.btn-sm.pull-right")
+            delete_btn.click()
+            button_yes = driver.find_elements_by_css_selector("button.btn.btn-primary")[2]
+            button_yes.click()
+            driver.back()
+            driver.back()
+            textboxprimer = driver.find_element_by_id('textarea-sequence')
+            textboxprimer.clear()
+            driver.refresh()
+            time.sleep(20)
+
+        return all_prices
+            
+            
+            
+            
+            
+                
+
+        
+
+        
 
         
 

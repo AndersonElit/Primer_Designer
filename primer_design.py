@@ -1,4 +1,4 @@
-from Primer_Designer_Functions import SEARCH, PRIMER_DESIGN, IN_SILICO_PCR, PRIMER_ANALYSIS
+from Primer_Designer_Functions import SEARCH, PRIMER_DESIGN, IN_SILICO_PCR, PRIMER_ANALYSIS, COTIZER
 
 keyword = "orf1ab AND coronavirus AND human AND HKU1"
 

@@ -538,7 +538,6 @@ class COTIZER:
                 
         if lencookie > 0:
             cookiebtn = driver.find_element_by_css_selector("a.cc-btn.cc-dismiss")
-            time.sleep(10)
             cookiebtn.click()
 
         time.sleep(20)
@@ -549,10 +548,10 @@ class COTIZER:
         password.send_keys("Anderlit89")
         button = wait.until(ec.presence_of_element_located((By.ID, 'login-button')))
         button.click()
-        time.sleep(20)
+        time.sleep(30)
         print('inicio de sesion')
         driver.refresh()
-        time.sleep(10)
+        time.sleep(30)
         all_prices = []
 
         for data_set in pcr_products:
@@ -564,43 +563,49 @@ class COTIZER:
             textboxprimer.send_keys(primerf)
             add_order_btn = driver.find_element_by_id('oa-btn-addtoorder')
             add_order_btn.click()
-            time.sleep(10)
+            time.sleep(30)
             name_input = driver.find_element_by_id('Name1')
             name_input.send_keys('primer1')
             add_to_order_btn = driver.find_element_by_id('deny')
             add_to_order_btn.click()
-            time.sleep(30)
-            driver.back()
-            driver.back()
+            time.sleep(10)
+            print('forward added')
+            driver.get('https://www.idtdna.com/calc/analyzer/')
+            time.sleep(20)
             textboxprimer = driver.find_element_by_id('textarea-sequence')
             textboxprimer.clear()
             textboxprimer.send_keys(primerr)
             add_order_btn = driver.find_element_by_id('oa-btn-addtoorder')
             add_order_btn.click()
+            time.sleep(30)
             name_input = driver.find_element_by_id('Name1')
             name_input.send_keys('primer2')
             add_to_order_btn = driver.find_element_by_id('deny')
             add_to_order_btn.click()
-            time.sleep(30)
+            time.sleep(20)
+            print('reverse added')
             pageprice = driver.page_source
             soupprice = BeautifulSoup(pageprice, 'html5lib')
             result_price = soupprice.find_all('div', class_ = 'col-sm-7')
             listh5 = result_price[0].find_all('h5')
             price_primers = listh5[0].text
             all_prices.append(price_primers)
+            print('precio guardado')
             checkbox = driver.find_element_by_id('CheckoutSelect')
             checkbox.click()
             delete_btn = driver.find_element_by_css_selector("button.btn.btn-default.btn-sm.pull-right")
             delete_btn.click()
             button_yes = driver.find_elements_by_css_selector("button.btn.btn-primary")[2]
             button_yes.click()
-            driver.back()
-            driver.back()
+            time.sleep(20)
+            print('resultados eliminados')
+            driver.get('https://www.idtdna.com/calc/analyzer/')
+            time.sleep(20)
             textboxprimer = driver.find_element_by_id('textarea-sequence')
             textboxprimer.clear()
             driver.refresh()
-            time.sleep(20)
 
+        driver.close()
         return all_prices
             
             

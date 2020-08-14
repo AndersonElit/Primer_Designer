@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from Primer_Designer_Functions import SEARCH, PRIMER_DESIGN, IN_SILICO_PCR
+from Primer_Designer_Functions import SEARCH, PRIMER_DESIGN, IN_SILICO_PCR, PRIMER_ANALYSIS, COTIZER
 from werkzeug.utils import secure_filename
 import os
 
@@ -28,8 +28,11 @@ def analysis(fasta_seq):
     dictionary = PRIMER_DESIGN.PRIMER3(fasta_seq)
     Primers_Tm_GC = PRIMER_DESIGN.primers_tm_gc(dictionary)
     pcr_products = IN_SILICO_PCR.in_silico_pcr(Primers_Tm_GC, fasta_seq)
+    thermo_analysis = PRIMER_ANALYSIS.oligoanalyzer(pcr_products)
+    IDT_prices = COTIZER.IDT(pcr_products)
+    all_data = [pcr_products, thermo_analysis, IDT_prices]
 
-    return pcr_products
+    return all_data
 
 '''    
 @app.route('/results', methods=['POST'])

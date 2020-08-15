@@ -2427,3 +2427,67 @@ JavaScript error: https://www.idtdna.com/site/scripts/idtdna/Common/IDTUtils.js?
 JavaScript error: https://www.idtdna.com/site/scripts/idtdna/Common/IDTUtils.js?v=2518, line 22: TypeError: responseText is undefined
 1597383819120	Marionette	INFO	Stopped listening on port 39221
 [Parent 2231, Gecko_IOThread] WARNING: pipe error (71): Connection reset by peer: file /build/firefox-esr-q0MF88/firefox-esr-68.10.0esr/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 358
+1597467437107	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilemm3LAr"
+1597467438711	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1597467438715	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1597467438716	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1597467438717	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+Sandbox: seccomp sandbox violation: pid 1749, tid 1749, syscall 315, args 1749 140664632531456 56 0 23 140664632531456.
+JavaScript error: undefined, line 14: Error: An unexpected error occurred
+JavaScript error: moz-extension://3c92028c-bae9-4656-aea1-03f02e2e1d1a/lib/picture_in_picture_overrides.js, line 15: Error: Incorrect argument types for pictureInPictureParent.setOverrides.
+Sandbox: seccomp sandbox violation: pid 1771, tid 1771, syscall 315, args 1771 140141622671296 56 0 32 140141622671296.
+JavaScript error: resource:///modules/sessionstore/SessionStore.jsm, line 1325: uncaught exception: 2147746065
+1597467442791	Marionette	INFO	Listening on port 39691
+1597467442867	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597469001208	Marionette	INFO	Stopped listening on port 39691
+1597469207557	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile7Vkheq"
+1597469208498	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1597469208502	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1597469208503	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1597469208503	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+Sandbox: seccomp sandbox violation: pid 2227, tid 2227, syscall 315, args 2227 139917192972224 56 0 32 139917192972224.
+Sandbox: seccomp sandbox violation: pid 2249, tid 2249, syscall 315, args 2249 140088678995904 56 0 32 140088678995904.
+JavaScript error: undefined, line 14: Error: An unexpected error occurred
+JavaScript error: moz-extension://6d067d05-6629-4196-915d-f961b712aafd/lib/picture_in_picture_overrides.js, line 15: Error: Incorrect argument types for pictureInPictureParent.setOverrides.
+JavaScript error: resource:///modules/sessionstore/SessionStore.jsm, line 1325: uncaught exception: 2147746065
+1597469212442	Marionette	INFO	Listening on port 39785
+1597469212490	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.idtdna.com/site/scripts/idtdna/Common/IDTUtils.js?v=2519, line 22: TypeError: responseText is undefined
+JavaScript error: https://www.idtdna.com/site/scripts/idtdna/Common/IDTUtils.js?v=2519, line 22: TypeError: responseText is undefined
+1597470308852	Marionette	INFO	Stopped listening on port 39785
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1597471744944	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileOeVxPL"
+1597471745978	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1597471745979	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1597471745980	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1597471745987	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+Sandbox: seccomp sandbox violation: pid 2913, tid 2913, syscall 315, args 2913 140646442121408 56 0 28 140646442121408.
+JavaScript error: undefined, line 14: Error: An unexpected error occurred
+Sandbox: seccomp sandbox violation: pid 2935, tid 2935, syscall 315, args 2935 140583835486016 56 0 32 140583835486016.
+JavaScript error: moz-extension://094e14b6-377b-46af-ac53-faad689b4ce8/lib/picture_in_picture_overrides.js, line 15: Error: Incorrect argument types for pictureInPictureParent.setOverrides.
+JavaScript error: resource:///modules/sessionstore/SessionStore.jsm, line 1325: uncaught exception: 2147746065
+1597471749081	Marionette	INFO	Listening on port 43987
+1597471749096	Marionette	WARN	TLS certificate errors will be ignored for this session
+1597473285820	Marionette	INFO	Stopped listening on port 43987
+1597473287608	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileHv3kAC"
+1597473288570	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1597473288571	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1597473288571	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1597473288571	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+Sandbox: seccomp sandbox violation: pid 3383, tid 3383, syscall 315, args 3383 140455283378112 56 0 32 140455283378112.
+Sandbox: seccomp sandbox violation: pid 3405, tid 3405, syscall 315, args 3405 139732493834368 56 0 29 139732493834368.
+JavaScript error: undefined, line 14: Error: An unexpected error occurred
+JavaScript error: moz-extension://a5329706-15f8-4fea-8db2-f64ce85ec305/lib/picture_in_picture_overrides.js, line 15: Error: Incorrect argument types for pictureInPictureParent.setOverrides.
+JavaScript error: resource:///modules/sessionstore/SessionStore.jsm, line 1325: uncaught exception: 2147746065
+1597473291782	Marionette	INFO	Listening on port 41943
+1597473291845	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.idtdna.com/site/scripts/idtdna/Common/IDTUtils.js?v=2519, line 22: TypeError: responseText is undefined
+JavaScript error: https://idtdna.qualtrics.com/jfe/form/SV_emO5shi0AiWULul?&o=-1, line 67: TypeError: e[a] is undefined
+JavaScript error: https://www.idtdna.com/site/scripts/idtdna/Common/IDTUtils.js?v=2519, line 22: TypeError: responseText is undefined
+1597474386464	Marionette	INFO	Stopped listening on port 41943
+[Parent 3322, Gecko_IOThread] WARNING: pipe error (126): Connection reset by peer: file /build/firefox-esr-q0MF88/firefox-esr-68.10.0esr/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 358

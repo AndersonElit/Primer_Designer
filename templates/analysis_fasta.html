@@ -47,17 +47,15 @@
         <div class="form-group">
             <form action="{{ url_for('fastaseq') }}">
                 {% for result in all_results %}
-                <!--
-                <table class="table table-hover">{{ result[0][0] }}</table>
-                -->
+
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">forward</h5>
-                                <p class="card-text">{{ result[0][0][0] }}</p>
+                                <p class="card-text">{{ result[0][0][0][0] }}</p>
                                 <h5 class="card-title">reverse</h5>
-                                <p class="card-text">{{ result[0][0][1] }}</p>
+                                <p class="card-text">{{ result[0][0][0][1] }}</p>
                             </div>
                         </div>
                     </div>
@@ -65,13 +63,40 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">producto</h5>
-                                <p class="card-text">{{ result[2] }}</p>
-                                <p class="card-text">{{ result[3] }}</p>
-                                <p class="card-text">{{ result[4] }}</p>
+                                <p class="card-text">{{ result[0][2] }}</p>
+                                <p class="card-text">{{ result[0][3] }}</p>
+                                <p class="card-text">{{ result[0][4] }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <table class="table">
+                    <thead>
+                        <th>hairpins</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>dG</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="{{ all_results[1][0][0][0][0] }}">
+                            </td>
+                            <td>{{ all_results[1][0][0][1][0] }}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="{{ all_results[1][0][0][0][1] }}">
+                            </td>
+                            <td>{{ all_results[1][0][0][1][1] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <th>homodimers</th>
+                    </thead>
+                </table>
                 {% endfor %}
             </form>
         </div>

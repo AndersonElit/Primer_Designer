@@ -9,3 +9,7 @@
 .wordstyle3 {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+td {
+    white-space: pre;
+}

@@ -63,40 +63,164 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">producto</h5>
-                                <p class="card-text">{{ result[0][2] }}</p>
-                                <p class="card-text">{{ result[0][3] }}</p>
-                                <p class="card-text">{{ result[0][4] }}</p>
+                                <p><small>{{ result[0][2] }}</small></p>
+                                <p><small>{{ result[0][3] }}</small></p>
+                                <p><small>{{ result[0][4] }}</small></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <table class="table">
-                    <thead>
-                        <th>hairpins</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>dG</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="{{ all_results[1][0][0][0][0] }}">
-                            </td>
-                            <td>{{ all_results[1][0][0][1][0] }}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="{{ all_results[1][0][0][0][1] }}">
-                            </td>
-                            <td>{{ all_results[1][0][0][1][1] }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table">
-                    <thead>
-                        <th>homodimers</th>
-                    </thead>
-                </table>
+
+                <!-- forward -->
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <table class="table">
+                            <thead>
+                                <th>hairpins-forward</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>ΔG</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <img src="{{ result[1][0][0][0][0] }}">
+                                                                    
+                                    </td>
+                                    <td>{{ result[1][0][0][1][0] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="{{ result[1][0][0][0][1] }}">
+                                    </td>
+                                    <td>{{ result[1][0][0][1][1] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-6">
+                        <table class="table">
+                            <thead>
+                                <th>homodimers-forward</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>ΔG</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][0][1][1][0] }}</td>
+                                    <td>{{ result[1][0][1][0][0] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][0][1][1][1] }}</td>
+                                    <td>{{ result[1][0][1][0][1] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][0][1][1][2] }}</td>
+                                    <td>{{ result[1][0][1][0][2] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- reverse -->
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <table class="table">
+                            <thead>
+                                <th>hairpins-reverse</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>ΔG</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="{{ result[1][1][0][0][0] }}">
+                                    </td>
+                                    <td>{{ result[1][1][0][1][0] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="{{ result[1][1][0][0][1] }}">
+                                    </td>
+                                    <td>{{ result[1][1][0][1][1] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-6">
+                        <table class="table">
+                            <thead>
+                                <th>homodimers-reverse</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>ΔG</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][1][1][1][0] }}</td>
+                                    <td>{{ result[1][1][1][0][0] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][1][1][1][1] }}</td>
+                                    <td>{{ result[1][1][1][0][1] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][1][1][1][2] }}</td>
+                                    <td>{{ result[1][1][1][0][2] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- heterodimers -->
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <table class="table">
+                            <thead>
+                                <th>heterodimers</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>ΔG</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][2][1][1][0] }}</td>
+                                    <td>{{ result[1][2][1][0][0] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][2][1][1][1] }}</td>
+                                    <td>{{ result[1][2][1][0][1] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ result[1][2][1][1][2] }}</td>
+                                    <td>{{ result[1][2][1][0][2] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-6">
+                        <table class="table">
+                            <thead>
+                                <th>primers price</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IDT</td>
+                                    <td>{{ result[2] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 {% endfor %}
             </form>
         </div>

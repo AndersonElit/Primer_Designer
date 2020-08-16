@@ -606,13 +606,7 @@ class COTIZER:
             driver.refresh()
 
         driver.close()
-        return all_prices
-            
-            
-            
-            
-            
-                
+        return all_prices    
 
         
 

@@ -343,7 +343,7 @@ class IN_SILICO_PCR:
             product = fasta_seq[start:end]
             seq_product = Seq(product)
             complement_product = str(seq_product.complement())
-            
+            '''
             cont = 0
             lines = []
             
@@ -353,6 +353,18 @@ class IN_SILICO_PCR:
                 cont += 1
             
             product_pair = [data, product_leght, product, complement_product, lines]
+            product_list.append(product_pair)
+            '''
+            cont = 0
+            lines = ''
+
+            while cont < distance:
+                line = '|'
+                lines += line
+                cont += 1
+            
+            amplified = product + '\n' + lines + '\n' + complement_product
+            product_pair = [data, product_leght, amplified]
             product_list.append(product_pair)
 
         return product_list
